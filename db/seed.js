@@ -1,5 +1,7 @@
-const { Entry } = require("../models")
+const { Entry, User } = require("../models")
 const { db } = require("./db");
+const SALT_COUNT = 10;
+const bcrypt = require("bcrypt")
 
 async function seed (){
 
@@ -18,6 +20,21 @@ async function seed (){
             date: "02/03/1944",
             description: "I have successfully blamed Hagrid's pet for the death of the student, but little do they know..."
         }
+    ])
+
+    const hashedpw = await bcrypt.hash("321", SALT_COUNT)
+    const hashedpw2 = await bcrypt.hash("123", SALT_COUNT)
+
+    await User.bulkCreate([
+        {
+            username: "123",
+            password: hashedpw
+        },
+        {
+            username: "1321",
+            password: hashedpw2
+        },
+
     ])
 }
 

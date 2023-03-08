@@ -3,6 +3,7 @@ const entryRouter = express.Router()
 const { Entry } = require("../models/entry")
 console.log("post to entryRouter")
 console.log(entryRouter)
+
 entryRouter.post("/", async (req, res) => {
     console.log("post/entries")
     try {
